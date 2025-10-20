@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { FormType, User } from "./types";
 
-export class Form {
+export class AuthProcessForm {
     private readonly page: Page;
 
     private readonly loginForm: Locator;
@@ -9,34 +9,26 @@ export class Form {
 
     private readonly formUrl: string;
 
+    readonly successMessage: Locator;
+    readonly errorMessageLogin: Locator;
+    readonly errorMessageRegister: Locator;
+
+
     constructor(page: Page) {
         this.page = page;
 
         this.loginForm = page.locator("[class='loginForm']");
         this.registerForm = page.locator("[class='registerForm']");
 
-        this.formUrl = "https://anatoly-karpovich.github.io/demo-login-form/"
-    }
+        this.formUrl = "https://anatoly-karpovich.github.io/demo-login-form/";
 
-    get successMessage () {
-        return this.page.locator("#successMessage");
-    }
-
-    get errorMessageLogin () {
-        return this.page.locator("#errorMessage");
-    }
-
-    get errorMessageRegister () {
-        return this.page.locator("#errorMessageOnRegister");
+        this.successMessage = this.page.locator("#successMessage");
+        this.errorMessageLogin = this.page.locator("#errorMessage");
+        this.errorMessageRegister = this.page.locator("#errorMessageOnRegister");
     }
 
     getFormUrl() {
         return this.formUrl;
-    }
-
-    getUser() {
-        const user: User = {name: "Pavel", password: "Pavel2005"};
-        return user;
     }
 
     async setUserInStorage(login: string, password: string) {

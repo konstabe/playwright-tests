@@ -16,11 +16,11 @@ test.describe.parallel(`login`, ()=> {
     });
 
     test(`login_mandatory`, {tag: "@smoke"}, async ({form, defaultUser}) => {
-        await mandatoryTestFunction({formType: "login", password:defaultUser.password, form});
+        await mandatoryTestFunction({formType: "login",form}, { password:defaultUser.password });
     });
 
     test(`password_mandatory`, {tag: "@smoke"}, async ({form, defaultUser}) => {
-        await mandatoryTestFunction({formType: "login", login:defaultUser.name, form});
+        await mandatoryTestFunction({formType: "login", form}, {login:defaultUser.name});
     });
 
 });
@@ -48,10 +48,10 @@ test.describe.parallel(`register`, () => {
     })
 
     test(`login_mandatory`, {tag: "@smoke"}, async ({form, defaultUser}) => {
-        await mandatoryTestFunction({formType: "register", password:defaultUser.password, form});
+        await mandatoryTestFunction({formType: "register", form}, {password:defaultUser.password});
     });
 
     test(`password_mandatory`, {tag: "@smoke"}, async ({form, defaultUser}) => {
-        await mandatoryTestFunction({formType: "register", login:defaultUser.name, form});
+        await mandatoryTestFunction({formType: "register", form}, {login:defaultUser.name});
     });
 });
